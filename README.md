@@ -1,5 +1,4 @@
 # seleniumproject
-nesse projeto fiz um robô para uma empresa jurídica. 
 
 o objetivo era agilizar o download de certos processos. 
 
