@@ -1,52 +1,18 @@
 # erros: quebra captcha e data
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from time import sleep
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.wait import WebDriverWait
 
 # 1:
 driver = webdriver.Chrome()  # definindo chrome como navegador
 driver.get('https://www.tjsp.jus.br/cac/scp/pesquisainternetpagamento.aspx')  # chegando ao site
-sleep(1)
-
-''' 
-# 3:
-# encontrando caixa pelo id e clicando
-driver.find_element('id', 'vTIPONOME1').click()
-if autoradvogado == '2':
-    driver.find_element('id', 'vTIPONOME2').click()
-sleep(1)
-# encontrando caixas pelo id e preenchendo
-driver.find_element('id', 'vNOME').send_keys('Maria Celeste Dalanesi Rosa')
-sleep(1)
-driver.find_element('id', 'vCRE_CPF_CNPJ').send_keys('14952130800')
-sleep(1)
-
-# ++++++ ERRO DATA
- data = driver.find_element(By.XPATH, '//*[@id="vCRE_DT_NASCIMENTO"]')
-driver.switch_to.frame(data)
-driver.switch_to.default_content()
-data.send_keys('09112005') 
-
-date_element = driver.find_element('id', 'vCRE_DT_NASCIMENTO')
-driver.find_element(By.ID, 'TEXTBLOCK11').click()
-date_element.click()
-date_element.send_keys('09/11/2005')
-sleep(1)
-'''
 
 # 2:
-driver.get("https://www.tjsp.jus.br/cac/scp/pesquisainternetpagamento.aspx")
-driver.find_element(By.ID, "vTIPONOME1").click()
-driver.find_element(By.ID, "vNOME").click()
-driver.find_element(By.ID, "vNOME").send_keys("Maria Celeste Dalanesi Rosa")
-driver.find_element(By.ID, "vCRE_CPF_CNPJ").click()
-driver.find_element(By.ID, "vCRE_CPF_CNPJ").send_keys("14952130800")
-
-driver.execute_script("document.getElementById('vCRE_DT_NASCIMENTO').setAttribute('value','16/09/1943')")
+driver.find_element(By.ID, "vTIPONOME1").click()  # clicando em autor/requerente
+driver.find_element(By.ID, "vNOME").send_keys("Maria Celeste Dalanesi Rosa")  # preenchendo o espaço de NOME
+driver.find_element(By.ID, "vCRE_CPF_CNPJ").send_keys("14952130800")  # preenchendo o espaço de CPF
+driver.execute_script("document.getElementById('vCRE_DT_NASCIMENTO').setAttribute('value','16/09/1943')")  # data
 
 # 3:
 # quebrando captcha
@@ -436,20 +402,16 @@ elif imagem == 'https://www.tjsp.jus.br/cac/scp/Captcha/images/190.jpg':
     r = 'tooth'
 elif imagem == 'https://www.tjsp.jus.br/cac/scp/Captcha/images/191.jpg':
     r = 'bucket'
-
 driver.find_element('id', '_cfield').send_keys(r)
-sleep(1)
 
 # 4:
 # passando a proxima pagina
-# WebDriverWait(driver, timeout=5).until(driver.find_element('name', 'BUTTON3').click())
 driver.find_element('name', 'BUTTON3').click()
-sleep(6)
+sleep(1.5)
 
 # 5:
 # fazendo download do arquivo
 driver.find_element('id', 'vSELECIONAR_0004').click()
 sleep(3)
-
 
 
